@@ -52,6 +52,9 @@ receipt_schema = {
 
 # Validate receipt
 def validate_receipt(data):
+    """
+    Validates receipt according to schema included in API specifications.
+    """
     try:
         validate(data, receipt_schema)
     except ValidationError:
@@ -62,6 +65,9 @@ def validate_receipt(data):
 # Process receipts
 @app.route('/receipts/process', methods=['POST'])
 def process_receipt():
+    """
+    Processes a receipt and returns its unique ID.
+    """
     data = request.get_json()
     
     try:
@@ -83,6 +89,9 @@ def process_receipt():
 # Get points
 @app.route('/receipts/<string:id>/points', methods=['GET'])
 def get_points(id):
+    """
+    Calculates and returns the point value for a given receipt.
+    """
     if id not in receipts:
         return {
             'error': 'NotFound',
